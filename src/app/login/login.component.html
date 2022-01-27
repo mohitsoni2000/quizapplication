@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <h1>Quiz Test</h1>
+      </div>
+
+      <!-- Login Form -->
+      <form>
+        <input
+          type="text"
+          id="login"
+          class="fadeIn second"
+          name="login"
+          placeholder="User"
+          [(ngModel)]="users.user"
+        />
+        <input
+          type="text"
+          id="password"
+          class="fadeIn third"
+          name="login"
+          [(ngModel)]="users.password"
+          placeholder="Password"
+          (keyup.enter)="logIn()"
+        />
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          value="Log In"
+          (click)="logIn()"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+</div>

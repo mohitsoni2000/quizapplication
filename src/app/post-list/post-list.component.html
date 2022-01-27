@@ -1,0 +1,22 @@
+<p *ngIf="postList.length == 0">Nothing is here!</p>
+<div
+  class="card my-3"
+  style="width: 18rem"
+  *ngFor="let post of postList; let i = index"
+>
+  <div class="card-body">
+    <h5 class="card-title">{{ post.postName }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ post.postAuthor }}</h6>
+    <p class="card-text">{{ post.postDesc }}</p>
+    <p>
+      <button
+        class="btn btn-danger"
+        [disabled]="deleteDis"
+        (click)="onPostDelete(i)"
+      >
+        Delete
+      </button>
+      <button class="btn btn-success mx-2" (click)="onPostEdit(i)">Edit</button>
+    </p>
+  </div>
+</div>
