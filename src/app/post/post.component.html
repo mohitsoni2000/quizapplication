@@ -1,9 +1,0 @@
-<app-post-create
-  [postList]="posts"
-  [postEdit]="editEventObj"
-  (postCreated)="onPostCreate($event)"
-
-></app-post-create>
-<hr />
-<p  *ngIf="posts.length < 0">Nothing is here!</p>
-<app-post-list [postList]="posts" (postEdit)="onPostEdit($event)"></app-post-list>
