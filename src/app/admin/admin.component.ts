@@ -7,42 +7,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 addQuestions: any = {
-  "questions": [
-    {
-      "questionText": "",
-      "options": [
-        {
-          "text": "",
-          "correct": false
-        },
-        {
-          "text": "",
-          "correct": false
+  "questions": {
+    "questionText": "",
+    "options": [
+      {
+        "text": "",
+        "correct": "true"
+      },
+      {
+        "text": "",
+        "correct": "true"
 
-        },
-        {
-          "text": "",
-          "correct": false
+      },
+      {
+        "text": "",
+        "correct": "true"
 
-        },
-        {
-          "text": "",
-          "correct": false
+      },
+      {
+        "text": "",
+        "correct": "true"
 
-        }
-      ],
-    }
-  ]
+      }
+    ]
+  }
 }
-
   constructor() { }
 
   ngOnInit(): void {
   }
 addedQuestion(){
-  console.log('Questions Added')
   }
 
+radioSelected(){
 
+}
 
 }
