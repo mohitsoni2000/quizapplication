@@ -1,18 +1,20 @@
-.heading{
-    text-align: center;
-font-weight: 600;
-font-size: 2.5rem;
+.heading {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.5rem;
 }
-.form-control-lg, .btn{
-    margin: 10px;
+.form-control-lg,
+.btn {
+  margin: 10px;
 }
-.form-control-sm{
-    margin: 5px 10px 5px 10px;
+
+li {
+  list-style-type: none;
 }
-.form-check-input{
-    float: left;
-    margin: 0px 3px 5px 15px;
+.answer {
+  background-color: green;
+  color: white;
 }
-li{
-    list-style-type: none;
+.answer::placeholder {
+  color: white;
 }
