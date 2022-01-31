@@ -2,9 +2,9 @@
   text-align: center;
   font-weight: 600;
   font-size: 2.5rem;
+  margin: 10px;
 }
-.form-control-lg,
-.btn {
+.form-control-lg{
   margin: 10px;
 }
 
@@ -16,5 +16,12 @@ li {
   color: white;
 }
 .answer::placeholder {
+  color: white;
+}
+.table{
+  margin-bottom: 50px;
+}
+.badge{
+  background-color: green;
   color: white;
 }

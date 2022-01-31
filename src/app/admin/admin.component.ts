@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionModel } from './question-model';
 
 @Component({
   selector: 'app-admin',
@@ -6,51 +7,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  addQuestions: any = {
-    questions: {
-      questionText: '',
-      options: [
-        {
-          text: '',
-          correct: true,
-        },
-        {
-          text: '',
-          correct: false,
-        },
-        {
-          text: '',
-          correct: false,
-        },
-        {
-          text: '',
-          correct: false,
-        },
-      ],
-    },
-  };
-  constructor() {}
+  questionObj: QuestionModel = new QuestionModel();
+  questionArray: QuestionModel[] = [];
+  isEdit: boolean = false;
+  selectedIndex: number = -1;
 
-  ngOnInit(): void {}
-  addedQuestion() {
-    console.log(this.addQuestions);
-    // console.log(this.addQuestions.questions.options);
-    console.log(this.addQuestions.questions.answer);
-   this.addQuestions = localStorage.setItem("Questions" , JSON.stringify( this.addQuestions.questions));
- this.addQuestions = [this.addQuestions, ...this.addQuestions ]
-// this.added = this.addQuestions.questions;
+  constructor() {
+    console.log(this.questionObj);
   }
-added(){
 
-}
+  ngOnInit() {
+    let stringQuestions = localStorage.getItem("Questions");
+    if (stringQuestions && stringQuestions != '') {
+      this.questionArray = JSON.parse(stringQuestions);
+    }
+  }
 
+  addQuestion() {
+    let question = [];
+    console.log("this is questionAraay", this.questionArray)
+    this.questionArray.push(JSON.parse(JSON.stringify(this.questionObj)));
+    console.log("this is questionObj", this.questionObj)
+    localStorage.setItem('Questions', JSON.stringify(this.questionArray));
+    this.questionObj = new QuestionModel();
+  }
+
+  updateQuestion() {
+    this.questionArray[this.selectedIndex] = this.questionObj;
+    localStorage.setItem('Questions', JSON.stringify(this.questionArray));
+    this.isEdit = false;
+    this.selectedIndex = -1;
+    this.questionObj = new QuestionModel();
+  }
 
   onRadioChange(i: any) {
-    console.log(console.log(this.addQuestions.questions.options[i].correct));
-
-    this.addQuestions.questions.options.forEach((el: any) => {
+    this.questionObj.optionArray.forEach((el: any) => {
       el.correct = false;
     });
-    this.addQuestions.questions.options[i].correct = true;
+    this.questionObj.optionArray[i].correct = true;
   }
+
+  onEdit(i: number) {
+    this.isEdit = true;
+    this.selectedIndex = i;
+    this.questionObj = JSON.parse(JSON.stringify(this.questionArray[i]));
+  }
+
+  delete(i: any) {
+    console.log('questionArray.........', this.questionArray);
+    this.questionArray.splice(i, 1);
+    console.log('delete', this.questionArray);
+    localStorage.setItem('Questions', JSON.stringify(this.questionArray));
+  }
+
+  deleteAll() {
+    localStorage.removeItem('Questions');
+  }
+
 }
