@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder} from '@angular/forms';
 import { QuestionModel } from './question-model';
 
 @Component({
@@ -12,8 +13,10 @@ export class AdminComponent implements OnInit {
   isEdit: boolean = false;
   selectedIndex: number = -1;
 
+
   constructor() {
     console.log(this.questionObj);
+
   }
 
   ngOnInit() {
@@ -21,15 +24,40 @@ export class AdminComponent implements OnInit {
     if (stringQuestions && stringQuestions != '') {
       this.questionArray = JSON.parse(stringQuestions);
     }
+
   }
 
   addQuestion() {
-    let question = [];
-    console.log("this is questionAraay", this.questionArray)
-    this.questionArray.push(JSON.parse(JSON.stringify(this.questionObj)));
-    console.log("this is questionObj", this.questionObj)
-    localStorage.setItem('Questions', JSON.stringify(this.questionArray));
-    this.questionObj = new QuestionModel();
+    if (!this.questionObj.question || this.questionObj.question == "") {
+      alert("Please Enter question field");
+      return;
+    }
+    if (this.questionObj.optionArray) {
+      let selectedRadio = false;
+      let isEmptyField = false;
+      for (let i = 0; i < this.questionObj.optionArray.length; i++) {
+        if (this.questionObj.optionArray[i].text == '') {
+          isEmptyField = true;
+        }
+
+        if (this.questionObj.optionArray[i].correct == true) {
+          selectedRadio = true;
+        }
+      }
+      if (isEmptyField || !selectedRadio) {
+        alert("There is some error, pls check all fields first");
+        return;
+      } else {
+        console.log("this is questionAraay", this.questionArray);
+
+        this.questionArray.push(JSON.parse(JSON.stringify(this.questionObj)));
+        console.log("this is questionObj", this.questionObj)
+        localStorage.setItem('Questions', JSON.stringify(this.questionArray));
+        this.questionObj = new QuestionModel();
+      }
+    }
+    // if (
+    //   this.questionObj.question != '' && this.questionObj.optionArray != '') 
   }
 
   updateQuestion() {
