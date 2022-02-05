@@ -17,8 +17,8 @@ export class DashboardComponent implements OnInit {
     let stringQuestions = localStorage.getItem('Questions');
     if (stringQuestions && stringQuestions != '') {
       this.questionArray = JSON.parse(stringQuestions);
-      this.questionArray .forEach((element:QuestionModel) => {
-        element.optionArray.forEach((el:any) => {
+      this.questionArray.forEach((element: QuestionModel) => {
+        element.optionArray.forEach((el: any) => {
           el.checked = false;
         })
       });
@@ -34,16 +34,27 @@ export class DashboardComponent implements OnInit {
   // getResult(){
   //   this.router.navigate(['/result']);
   // }
-  onRadioChange(quesIndex:number, optionIndex:number) {
-    // this.questionObj.optionArray.forEach((el: any) => {
-    //   el.correct = false;
-    // });
-    this.questionObj.optionArray[optionIndex].checked = true;
+  onRadioChange(quesIndex: number, optionIndex: number) {
     console.log('quesIndex', quesIndex);
     console.log('quesIndex', optionIndex);
+    console.log('this.questionArray', this.questionArray[quesIndex]);
+    console.log('this.optionArray', this.questionArray[quesIndex].optionArray[optionIndex]);
+    for (let i = 0; i < this.questionArray[quesIndex].optionArray.length; i++) {
+      if (i == optionIndex) {
+        this.questionArray[quesIndex].optionArray[i].checked = true;
+      } else {
+        this.questionArray[quesIndex].optionArray[i].checked = false;
+      }
+    }
+    console.log('this.optionArray', this.questionArray[quesIndex].optionArray[optionIndex]);
+    // this.questionArray[quesIndex].optionArray[optionIndex].checked = true;
+    // this.questionObj.optionArray.forEach((el: any) => {
+    //   el.checked = false;
+    // });
+    // this.questionObj.optionArray[optionIndex].checked = true;
   }
 
-  finalSubmit(){
+  finalSubmit() {
     console.log(this.questionArray);
   }
 }
