@@ -3,19 +3,23 @@ export class QuestionModel {
     optionArray: [
         {
             text: string,
-            correct: boolean
+            correct: boolean,
+            checked?: boolean
         },
         {
             text: string,
-            correct: boolean
+            correct: boolean,
+            checked?: boolean
         },
         {
             text: string,
-            correct: boolean
+            correct: boolean,
+            checked?: boolean
         },
         {
             text: string,
-            correct: boolean
+            correct: boolean,
+            checked?: boolean
         },
     ]
     constructor() {

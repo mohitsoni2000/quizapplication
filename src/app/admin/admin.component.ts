@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { QuestionModel } from './question-model';
 
 @Component({
@@ -24,7 +24,6 @@ export class AdminComponent implements OnInit {
     if (stringQuestions && stringQuestions != '') {
       this.questionArray = JSON.parse(stringQuestions);
     }
-
   }
 
   addQuestion() {
@@ -47,17 +46,27 @@ export class AdminComponent implements OnInit {
       if (isEmptyField || !selectedRadio) {
         alert("There is some error, pls check all fields first");
         return;
-      } else {
-        console.log("this is questionAraay", this.questionArray);
-
-        this.questionArray.push(JSON.parse(JSON.stringify(this.questionObj)));
-        console.log("this is questionObj", this.questionObj)
-        localStorage.setItem('Questions', JSON.stringify(this.questionArray));
-        this.questionObj = new QuestionModel();
       }
     }
-    // if (
-    //   this.questionObj.question != '' && this.questionObj.optionArray != '') 
+    if (this.questionObj.question) {
+      let checkExists = false;
+      for (var i = 0; i < this.questionArray.length; i++) {
+        if (this.questionObj.question == this.questionArray[i].question) {
+          checkExists = true;
+          console.log('Repeated Value')
+          alert('Repeated Value');
+        }
+        console.log('Repeated Value', this.questionObj.question.length);
+        console.log('Repeated Value', checkExists, i);
+      }
+      if (checkExists == false) {
+        console.log("this is questionAraay", this.questionArray);
+        this.questionArray.push(JSON.parse(JSON.stringify(this.questionObj)));
+        console.log("this is questionObj", this.questionObj)
+      }
+    }
+    localStorage.setItem('Questions', JSON.stringify(this.questionArray));
+    this.questionObj = new QuestionModel();
   }
 
   updateQuestion() {

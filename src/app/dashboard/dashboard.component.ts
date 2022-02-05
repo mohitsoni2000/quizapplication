@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuestionsService } from '../service/questions.service';
+import { QuestionModel } from '../admin/question-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,22 +8,42 @@ import { QuestionsService } from '../service/questions.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  questionList: any = [];
-  constructor(private questionService: QuestionsService,
-    private router: Router ) { }
+  questionObj: QuestionModel = new QuestionModel();
+  questionArray: QuestionModel[] = [];
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.getAllQuestion();
+    let stringQuestions = localStorage.getItem('Questions');
+    if (stringQuestions && stringQuestions != '') {
+      this.questionArray = JSON.parse(stringQuestions);
+      this.questionArray .forEach((element:QuestionModel) => {
+        element.optionArray.forEach((el:any) => {
+          el.checked = false;
+        })
+      });
+    }
   }
-  getAllQuestion() {
-    this.questionService.getQuestion().subscribe(res => {
-      console.log(res.questions);
-      this.questionList = res.questions;
-    })
+  // getAllQuestion() {
+  //   this.questionService.getQuestion().subscribe(res => {
+  //     console.log(res.questions);
+  //     this.questionList = res.questions;
+  //   })
+  // }
+
+  // getResult(){
+  //   this.router.navigate(['/result']);
+  // }
+  onRadioChange(quesIndex:number, optionIndex:number) {
+    // this.questionObj.optionArray.forEach((el: any) => {
+    //   el.correct = false;
+    // });
+    this.questionObj.optionArray[optionIndex].checked = true;
+    console.log('quesIndex', quesIndex);
+    console.log('quesIndex', optionIndex);
   }
 
-  getResult(){
-    this.router.navigate(['/result']);
+  finalSubmit(){
+    console.log(this.questionArray);
   }
-  
 }

@@ -1,3 +1,4 @@
+
 .heading {
   text-align: center;
   font-weight: 600;
@@ -24,4 +25,7 @@ li {
 .badge{
   background-color: green;
   color: white;
+}
+.btn {
+  width: auto;
 }
